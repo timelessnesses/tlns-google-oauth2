@@ -1,0 +1,13 @@
+https://www.googleapis.com/auth/admob.readonly See your AdMob data
+openid	Associate you with your personal info on Google
+Google Play Game Management, v1management
+Google Play Game Services, v1
+Google Sign-In
+email	See your primary Google Account email address
+openid	Associate you with your personal info on Google
+profile	See your personal info, including any personal info you've made publicly available
+OpenID Connect, 1.0
+email	See your primary Google Account email address
+openid	Associate you with your personal info on Google
+profile	See your personal info, including any personal info you've made publicly available
+openid	Associate you with your personal info on Google
