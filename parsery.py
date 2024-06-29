@@ -1,5 +1,6 @@
-import yarl
 import json
+
+import yarl
 
 content = open("./info.txt")
 unparsable_line = open("./unparsable.txt", "w+")
@@ -25,7 +26,12 @@ for l in content.readlines():
             unparsable_line.write(l + "\n")
         http_api = yarl.URL(http_api)
         name = http_api.parts[-2] + " " + http_api.parts[-1]
-        name = "".join(" ".join((" ".join(name.split(".")).split("-"))).title().split(" ")).replace("only", "Only").strip("(").strip(")")
+        name = (
+            "".join(" ".join((" ".join(name.split(".")).split("-"))).title().split(" "))
+            .replace("only", "Only")
+            .strip("(")
+            .strip(")")
+        )
         try:
             infos[current_api].append((str(http_api), doc, name))
         except KeyError:
@@ -34,8 +40,8 @@ for l in content.readlines():
         continue
     elif "API" in l:
         current_api = "".join("".join(l.split(",")).split(" "))
-        current_api = current_api.replace("&","And").replace(".", "Point")
+        current_api = current_api.replace("&", "And").replace(".", "Point")
         continue
-    unparsable_line.write(l+ "\n")
+    unparsable_line.write(l + "\n")
 
 json.dump(infos, open("./out.json", "w"), sort_keys=True, indent=4)
