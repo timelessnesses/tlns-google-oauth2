@@ -1,3 +1,5 @@
+#![doc = include_str!("../README.md")]
+
 use oauth2::{self, basic::BasicTokenType, CsrfToken, EmptyExtraTokenFields};
 use scopes::ToGoogleScope;
 

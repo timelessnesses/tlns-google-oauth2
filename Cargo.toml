@@ -1,5 +1,5 @@
 [package]
-name = "tlns-google-oauth2-actix"
+name = "tlns-google-oauth2"
 version = "0.1.0"
 edition = "2021"
 
