@@ -2,6 +2,8 @@
 name = "tlns-google-oauth2"
 version = "0.1.0"
 edition = "2021"
+description = "An enshitificated Google OAuth2 Server Side support for Rust with built in Scopes enum"
+license = "MIT"
 
 [dependencies]
 oauth2 = { version = "4.4.2", features = ["reqwest"] }
