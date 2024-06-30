@@ -6,7 +6,7 @@ description = "An enshitificated Google OAuth2 Server Side support for Rust with
 license-file = "../LICENSE"
 repository = "https://github.com/timelessnesses/tlns-google-oauth2"
 documentation = "https://docs.rs/tlns-google-oauth2"
-readme = "../README.md"
+readme = "./README.md"
 
 [lib]
 path = "./src/lib.rs"
