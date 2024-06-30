@@ -26,3 +26,7 @@ let code = "...";
 let token = client.get_token(code.to_string()).await.unwrap();
 // Do request stuff
 ```
+
+## Credits
+
+Thanks [`heapunderfl0w`](https://github.com/heapunderfl0w) for the proc macro idea instead of shitty Jinja2 implementation!
