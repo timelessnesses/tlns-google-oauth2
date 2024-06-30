@@ -4,7 +4,7 @@ A server-side Google OAuth2 authentication with built in scopes for extra type s
 
 ## Generating scopes enums
 
-Go to [Google's OAuth2 Scopes Listing](https://developers.google.com/identity/protocols/oauth2/scopes) and start copying from the first header to the final row of the table at the bottom of the document.
+Go to [Google's OAuth2 Scopes Listing](https://developers.google.com/identity/protocols/oauth2/scopes) and start copying from the first header to the final row of the table at the bottom of the document.  
 ![A picture showing the first blue header](./lmao.png)  
 ![A picture showing the last row of the table](./help.png)  
 Then pasting all of that to the `info.txt` and execute `parsery.py` and `to_rust.py` in order.  
