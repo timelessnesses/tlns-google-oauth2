@@ -1,3 +1,6 @@
+/// # tlns-google-oauth2-proc
+/// This crate contains [`generate_scopes_enums`]
+
 use std::collections::HashMap;
 
 use proc_macro::TokenStream;
@@ -12,12 +15,13 @@ type VALIDRUSTNAME = String;
 #[proc_macro]
 pub fn generate_scopes_enums(_: TokenStream) -> TokenStream {
     let trait_for_scopes = quote! {
+        /// Converting enum scopes to string
         pub trait ToGoogleScope {
             fn to_google_scope(&self) -> &'static str;
         }
     };
 
-    let content = include_str!("../../info.txt");
+    let content = include_str!("../info.txt");
 
     let mut stuffs: HashMap<String, Vec<(VALIDRUSTNAME, DOCUMENTATION, APISCOPE)>> = HashMap::new();
     let mut current_header = "".to_string();
@@ -62,8 +66,7 @@ pub fn generate_scopes_enums(_: TokenStream) -> TokenStream {
                         if api_scope_thing.contains("mail") {
                             valided_rust = "Gmail".to_string();
                         } else {
-                            eprintln!("Concerning {api_scope_thing}");
-                            valided_rust = "".to_string();
+                            panic!("Weird scope: {api_scope_thing}")
                         }
                     }
                 }

@@ -913,7 +913,7 @@ dependencies = [
 
 [[package]]
 name = "tlns-google-oauth2"
-version = "0.1.1"
+version = "0.2.0"
 dependencies = [
  "oauth2",
  "tlns-google-oauth2-proc",

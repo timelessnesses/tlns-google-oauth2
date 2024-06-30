@@ -2,14 +2,18 @@
 name = "tlns-google-oauth2-proc"
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/timelessnesses/tlns-google-oauth2"
+documentation = "https://docs.rs/tlns-google-oauth2-proc"
+readme = "../README.md"
 
 [lib]
 proc-macro = true
 path = "./src/lib.rs"
+include = ["./info.txt"]
 
 [dependencies]
 proc-macro2 = "1.0.86"
 quote = "1.0.36"
-syn = { version = "2.0.68", features = ["extra-traits"] }
+syn = { version = "2.0.68", features = ["derive"] }
 titlecase = "3.2.0"
 url = "2.5.2"
