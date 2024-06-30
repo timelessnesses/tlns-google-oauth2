@@ -1,0 +1,15 @@
+[package]
+name = "tlns-google-oauth2-proc"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+proc-macro = true
+path = "./src/lib.rs"
+
+[dependencies]
+proc-macro2 = "1.0.86"
+quote = "1.0.36"
+syn = { version = "2.0.68", features = ["extra-traits"] }
+titlecase = "3.2.0"
+url = "2.5.2"

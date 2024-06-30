@@ -1,5 +1,0 @@
-OpenID Connect, 1.0
-email	See your primary Google Account email address
-openid	Associate you with your personal info on Google
-profile	See your personal info, including any personal info you've made publicly available
-openid	Associate you with your personal info on Google

@@ -13,7 +13,7 @@ Scopes
 https://www.googleapis.com/auth/adexchange.buyer	Manage your Ad Exchange buyer account configuration
 AdMob API, v1
 Scopes
-https://www.googleapis.com/auth/admob.readonly See your AdMob data
+https://www.googleapis.com/auth/admob.readonly	See your AdMob data
 https://www.googleapis.com/auth/admob.report	See your AdMob data
 AdSense Host API, v4.1
 Scopes
