@@ -13,4 +13,4 @@ path = "./src/lib.rs"
 
 [dependencies]
 oauth2 = { version = "4.4.2", features = ["reqwest"] }
-tlns-google-oauth2-proc = { path = "../tlns-google-oauth2-proc" }
+tlns-google-oauth2-proc = "0.1.0"
