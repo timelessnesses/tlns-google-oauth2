@@ -916,12 +916,25 @@ name = "tlns-google-oauth2"
 version = "0.3.0"
 dependencies = [
  "oauth2",
- "tlns-google-oauth2-proc",
+ "tlns-google-oauth2-proc 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "tlns-google-oauth2-proc"
 version = "0.2.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+ "titlecase",
+ "url",
+]
+
+[[package]]
+name = "tlns-google-oauth2-proc"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fef6a09d67008f4b02a628ca356c83a31ff82fda6f2fd782c282659f957fabcc"
 dependencies = [
  "proc-macro2",
  "quote",
