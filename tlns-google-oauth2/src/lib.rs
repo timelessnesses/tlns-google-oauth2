@@ -42,6 +42,11 @@ impl<'b> GoogleOAuth2Client<'b> {
     /// Scopes example will be
     /// ```rust
     /// vec![&tlns_google_oauth2::scopes::GoogleOAuth2APIv2::AuthUserinfoProfile];
+    /// ```  
+    /// Or like this!
+    /// ```rust
+    /// use crate::tlns_google_oauth2::scopes::FromGoogleScope;
+    /// vec![&tlns_google_oauth2::scopes::GoogleOAuth2APIv2::from_google_scope("https://www.googleapis.com/auth/userinfo.profile").unwrap()];
     /// ```
     pub fn authorize_url<'a>(
         &self,

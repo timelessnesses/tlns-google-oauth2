@@ -1,6 +1,6 @@
 [package]
 name = "tlns-google-oauth2"
-version = "0.2.2"
+version = "0.3.0"
 edition = "2021"
 description = "An enshitificated Google OAuth2 Server Side support for Rust with built in Scopes enum"
 license-file = "../LICENSE"
@@ -13,4 +13,9 @@ path = "./src/lib.rs"
 
 [dependencies]
 oauth2 = { version = "4.4.2", features = ["reqwest"] }
-tlns-google-oauth2-proc = "0.1.1"
+tlns-google-oauth2-proc = {path = "../tlns-google-oauth2-proc"}
+
+[features]
+grouped-scopes = []
+scopes = []
+default = ["grouped-scopes"]
