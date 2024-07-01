@@ -38,7 +38,7 @@ let token = client.get_token(code.to_string()).await.unwrap();
 use tlns_google_oauth2::GoogleOAuth2Client as Client;
 use tlns_google_oauth2::scopes;
 let client = Client::new("CLIENT_ID".to_string(), "CLIENT_SECRET".to_string(), "http://localhost:8080/callback".to_string()).expect("Failed to build client");
-let auth = client.authorize_url(None, vec![&scopes::AuthUserinfoProfile]).unwrap();
+let auth = client.authorize_url(None, vec![&scopes::Scopes::AuthUserinfoProfile]).unwrap();
 let url = auth.0;
 let csrf_token = auth.1;
 let scopes = auth.2;
