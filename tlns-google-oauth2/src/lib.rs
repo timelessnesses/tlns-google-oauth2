@@ -1,9 +1,12 @@
 #![doc = include_str!("../README.md")]
 
-use oauth2::{self, basic::BasicTokenType, CsrfToken, EmptyExtraTokenFields};
-use scopes::ToGoogleScope;
+use core::panic::{RefUnwindSafe, UnwindSafe};
 
+use oauth2::{self, basic::BasicTokenType, CsrfToken, EmptyExtraTokenFields};
+
+pub mod grouped_scopes;
 pub mod scopes;
+pub use tlns_google_oauth2_traits::{FromGoogleScope, ToGoogleScope};
 
 /// A thin wrapper around [`oauth2`] for Google OAuth2.
 pub struct GoogleOAuth2Client<'b> {
@@ -11,8 +14,10 @@ pub struct GoogleOAuth2Client<'b> {
     redirect_uri: std::borrow::Cow<'b, oauth2::RedirectUrl>,
 }
 
+pub type Scope = dyn ToGoogleScope + Send + Sync + UnwindSafe + RefUnwindSafe;
+
 /// Authentication stuffs
-pub struct Authentication<'a>(pub String, pub CsrfToken, pub Vec<&'a dyn ToGoogleScope>);
+pub struct Authentication<'a>(pub String, pub CsrfToken, pub Vec<&'a Scope>);
 
 impl<'b> GoogleOAuth2Client<'b> {
     /// Create new [`crate::GoogleOAuth2Client`] instance
@@ -37,21 +42,25 @@ impl<'b> GoogleOAuth2Client<'b> {
         })
     }
 
-    /// Make a authorization URL for user to authenticate  
-    /// `csrf_token` will be default [`oauth2::CsrfToken::new_random`]  
-    /// Scopes example will be
+    /// Make a authorization URL for user to authenticate
+    /// `csrf_token` will be default [`oauth2::CsrfToken::new_random`]
+    /// [`crate::grouped_scopes`] example will be
     /// ```rust
-    /// vec![&tlns_google_oauth2::scopes::GoogleOAuth2APIv2::AuthUserinfoProfile];
-    /// ```  
+    /// vec![&tlns_google_oauth2::grouped_scopes::GoogleOAuth2APIv2::AuthUserinfoProfile];
+    /// ```
     /// Or like this!
     /// ```rust
-    /// use crate::tlns_google_oauth2::scopes::FromGoogleScope;
-    /// vec![&tlns_google_oauth2::scopes::GoogleOAuth2APIv2::from_google_scope("https://www.googleapis.com/auth/userinfo.profile").unwrap()];
+    /// use tlns_google_oauth2::FromGoogleScope;
+    /// vec![&tlns_google_oauth2::grouped_scopes::GoogleOAuth2APIv2::from_google_scope("https://www.googleapis.com/auth/userinfo.profile").unwrap()];
+    /// ```
+    /// Or if you are using [`crate::scopes`]
+    /// ```rust
+    /// vec![&tlns_google_oauth2::scopes::Scopes::AuthUserinfoProfile];
     /// ```
     pub fn authorize_url<'a>(
         &self,
         csrf_token: Option<fn() -> CsrfToken>,
-        scopes: Vec<&'a dyn ToGoogleScope>,
+        scopes: Vec<&'a Scope>,
     ) -> Result<Authentication<'a>, String> {
         let auth_req = self
             .client

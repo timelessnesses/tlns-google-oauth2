@@ -1,5 +1,4 @@
 #[doc = include_str!("../README.md")]
-
 use std::collections::HashMap;
 
 use proc_macro::TokenStream;
@@ -15,18 +14,7 @@ type VALIDRUSTNAME = String;
 /// A procedural macro for generating group scope enums
 pub fn generate_grouped_scopes_enums(_: TokenStream) -> TokenStream {
     let trait_for_scopes = quote! {
-        /// Converting enum scopes to string
-        pub trait ToGoogleScope {
-            /// Converting the enum back to [`&'static str`]
-            fn to_google_scope(&self) -> &'static str;
-        }
-
-        /// Converting scope strings to [`T`]
-        pub trait FromGoogleScope<T> {
-            /// Converting Google Scope to enum
-            /// This might return [`Err`] if you input an invalid Google Scope.
-            fn from_google_scope(google_scope: &str) -> Result<T, ()>;
-        }
+        use tlns_google_oauth2_traits::{*};
     };
 
     let content = include_str!("../info.txt");
@@ -109,7 +97,7 @@ pub fn generate_grouped_scopes_enums(_: TokenStream) -> TokenStream {
             .iter()
             .map(|(n, _, _)| syn::Ident::new(&n, proc_macro2::Span::call_site()))
             .collect::<Vec<proc_macro2::Ident>>();
-        let scope_variants = v.iter().map(|(_,_,s)| s).collect::<Vec<&String>>();
+        let scope_variants = v.iter().map(|(_, _, s)| s).collect::<Vec<&String>>();
         let doc_variants = v
             .iter()
             .map(|(_, d, s)| {
@@ -160,18 +148,7 @@ pub fn generate_grouped_scopes_enums(_: TokenStream) -> TokenStream {
 /// A procedural macro for generating scope enums
 pub fn generate_scopes_enums(_: TokenStream) -> TokenStream {
     let trait_for_scopes = quote! {
-        /// Converting enum scopes to string
-        pub trait ToGoogleScope {
-            /// Converting the enum back to [`&'static str`]
-            fn to_google_scope(&self) -> &'static str;
-        }
-
-        /// Converting scope strings to [`T`]
-        pub trait FromGoogleScope {
-            /// Converting Google Scope to enum
-            /// This might return [`Err`] if you input an invalid Google Scope.
-            fn from_google_scope(google_scope: &str) -> Result<Scopes, ()>;
-        }
+        use tlns_google_oauth2_traits::{*};
     };
 
     let content = include_str!("../info.txt");
@@ -217,35 +194,45 @@ pub fn generate_scopes_enums(_: TokenStream) -> TokenStream {
                         }
                     }
                 }
-                scopes_map.entry(api_scope_thing.clone())
-                    .or_insert((valided_rust, doc, api_scope_thing));
+                scopes_map.entry(api_scope_thing.clone()).or_insert((
+                    valided_rust,
+                    doc,
+                    api_scope_thing,
+                ));
                 break;
             }
         }
     }
 
-    let enum_variants = scopes_map.iter().map(|(_, (valided_rust, doc, api_scope_thing))| {
-        let fd = format!("Documentation: {doc}, Scope: {api_scope_thing}");
-        let variant = syn::Ident::new(valided_rust, proc_macro2::Span::call_site());
-        quote! {
-            #[doc = #fd]
-            #variant,
-        }
-    });
+    let enum_variants = scopes_map
+        .iter()
+        .map(|(_, (valided_rust, doc, api_scope_thing))| {
+            let fd = format!("Documentation: {doc}, Scope: {api_scope_thing}");
+            let variant = syn::Ident::new(valided_rust, proc_macro2::Span::call_site());
+            quote! {
+                #[doc = #fd]
+                #variant,
+            }
+        });
 
-    let to_google_scope_impl = scopes_map.iter().map(|(_, (valided_rust, _, api_scope_thing))| {
-        let variant = syn::Ident::new(valided_rust, proc_macro2::Span::call_site());
-        quote! {
-            Scopes::#variant => #api_scope_thing,
-        }
-    });
+    let to_google_scope_impl = scopes_map
+        .iter()
+        .map(|(_, (valided_rust, _, api_scope_thing))| {
+            let variant = syn::Ident::new(valided_rust, proc_macro2::Span::call_site());
+            quote! {
+                Scopes::#variant => #api_scope_thing,
+            }
+        });
 
-    let from_google_scope_impl = scopes_map.iter().map(|(_, (valided_rust, _, api_scope_thing))| {
-        let variant = syn::Ident::new(valided_rust, proc_macro2::Span::call_site());
-        quote! {
-            #api_scope_thing => Ok(Scopes::#variant),
-        }
-    });
+    let from_google_scope_impl =
+        scopes_map
+            .iter()
+            .map(|(_, (valided_rust, _, api_scope_thing))| {
+                let variant = syn::Ident::new(valided_rust, proc_macro2::Span::call_site());
+                quote! {
+                    #api_scope_thing => Ok(Scopes::#variant),
+                }
+            });
 
     let expanded = quote! {
         #trait_for_scopes
@@ -263,7 +250,7 @@ pub fn generate_scopes_enums(_: TokenStream) -> TokenStream {
             }
         }
 
-        impl FromGoogleScope for Scopes {
+        impl FromGoogleScope<Scopes> for Scopes {
             fn from_google_scope(google_scope: &str) -> Result<Scopes, ()> {
                 match google_scope {
                     #(#from_google_scope_impl)*

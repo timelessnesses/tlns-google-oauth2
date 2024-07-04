@@ -1,0 +1,6 @@
+[package]
+name = "tlns-google-oauth2-traits"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
