@@ -2,5 +2,9 @@
 name = "tlns-google-oauth2-traits"
 version = "0.1.0"
 edition = "2021"
+description = "A bunch of traits for `tlns-google-oauth2-traits`"
+license = "MIT"
+repository = "https://github.com/timelessnesses/tlns-google-oauth2"
+documentation = "https://docs.rs/tlns-google-oauth2-traits"
 
 [dependencies]

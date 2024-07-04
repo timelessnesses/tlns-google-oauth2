@@ -6,7 +6,7 @@ repository = "https://github.com/timelessnesses/tlns-google-oauth2"
 documentation = "https://docs.rs/tlns-google-oauth2-proc"
 readme = "./README.md"
 description = "A half-assed procedural macro that generates Scope enums and trait that converting the scopes back and fourth"
-license-file = "../LICENSE"
+license = "MIT"
 
 [lib]
 proc-macro = true
@@ -18,4 +18,3 @@ quote = "1.0.36"
 syn = { version = "2.0.68", features = ["derive"] }
 titlecase = "3.2.0"
 url = "2.5.2"
-tlns-google-oauth2-traits = { path = "../tlns-google-oauth2-traits" }
