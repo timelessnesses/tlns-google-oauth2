@@ -1,3 +1,7 @@
 [workspace]
-members = ["tlns-google-oauth2", "tlns-google-oauth2-proc", "tlns-google-oauth2-traits"]
+members = [
+    "tlns-google-oauth2",
+    "tlns-google-oauth2-proc",
+    "tlns-google-oauth2-traits",
+]
 resolver = "2"

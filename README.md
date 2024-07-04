@@ -4,17 +4,12 @@ A server-side Google OAuth2 authentication with built in scopes for extra type s
 
 ## Generating scopes enums (for proc macro library part only)
 
-Go to [Google's OAuth2 Scopes Listing](https://developers.google.com/identity/protocols/oauth2/scopes) and start copying from the first header to the final row of the table at the bottom of the document.  
-![A picture showing the first blue header](./lmao.png)  
-![A picture showing the last row of the table](./help.png)  
+Go to [Google's OAuth2 Scopes Listing](https://developers.google.com/identity/protocols/oauth2/scopes) and start copying from the first header to the final row of the table at the bottom of the document.
+![A picture showing the first blue header](./lmao.png)
+![A picture showing the last row of the table](./help.png)
 Then pasting all of that to the `info.txt` and build the library, it will give you all possible scopes!
 
-## Features
-
-- `grouped-scopes` is scopes as a variant inside a grouped header (Like `Google OAuth2 API, v2` will now be `GoogleOAuth2APIv2`) (Default)
-- `scopes` is scopes as a variant in a giant [`scopes::Scopes`] enum for easy usage.
-
-## Usage (`grouped-scopes` feature)
+## Usage ([`crate::grouped_scopes`])
 
 ```rust,ignore
 use tlns_google_oauth2::GoogleOAuth2Client as Client;
@@ -32,7 +27,7 @@ let token = client.get_token(code.to_string()).await.unwrap();
 // Do request stuff
 ```
 
-## Usage (`scopes` feature)
+## Usage ([`crate::scopes::Scopes`])
 
 ```rust,ignore
 use tlns_google_oauth2::GoogleOAuth2Client as Client;

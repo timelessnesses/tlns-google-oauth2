@@ -6,7 +6,7 @@ pub trait ToGoogleScope {
     fn to_google_scope(&self) -> &'static str;
 }
 
-/// Converting scope strings to [`T`]
+/// Converting scope strings to `T`
 pub trait FromGoogleScope<T> {
     /// Converting Google Scope to enum
     /// This might return [`Err`] if you input an invalid Google Scope.

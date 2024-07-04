@@ -9,12 +9,7 @@ Go to [Google's OAuth2 Scopes Listing](https://developers.google.com/identity/pr
 ![A picture showing the last row of the table](./help.png)
 Then pasting all of that to the `info.txt` and build the library, it will give you all possible scopes!
 
-## Features
-
-- `grouped-scopes` is scopes as a variant inside a grouped header (Like `Google OAuth2 API, v2` will now be `GoogleOAuth2APIv2`) (Default)
-- `scopes` is scopes as a variant in a giant [`crate::scopes::Scopes`] enum for easy usage.
-
-## Usage (`grouped-scopes` feature)
+## Usage ([`crate::grouped_scopes`])
 
 ```rust,ignore
 use tlns_google_oauth2::GoogleOAuth2Client as Client;
@@ -32,7 +27,7 @@ let token = client.get_token(code.to_string()).await.unwrap();
 // Do request stuff
 ```
 
-## Usage (`scopes` feature)
+## Usage ([`crate::scopes::Scopes`])
 
 ```rust,ignore
 use tlns_google_oauth2::GoogleOAuth2Client as Client;
