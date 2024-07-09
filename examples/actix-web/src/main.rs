@@ -1,4 +1,5 @@
 use std::{collections::HashMap, sync::RwLock};
+use better_panic;
 
 use actix_web;
 
@@ -6,6 +7,7 @@ mod user;
 
 #[actix_web::main]
 async fn main() {
+    better_panic::Settings::new().verbosity(better_panic::Verbosity::Full).install();
     let db = std::sync::Arc::new(RwLock::new(HashMap::<String, String>::new()));
     let server = actix_web::HttpServer::new(move || {
         actix_web::App::new()
@@ -13,7 +15,7 @@ async fn main() {
                 tlns_google_oauth2::GoogleOAuth2Client::new(
                     std::env::var("GOOGLE_CLIENT_ID").unwrap(),
                     std::env::var("GOOGLE_CLIENT_SECRET").unwrap(),
-                    "https://softfox.api.timelessnesses.me/callback".to_string(),
+                    "https://localhost:12700".to_string(),
                 )
                 .expect("Failed to build client"),
             ))

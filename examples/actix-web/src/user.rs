@@ -11,7 +11,7 @@ async fn user_auth(
     let auth = oauth_client
         .authorize_url(
             None,
-            vec![&tlns_google_oauth2::scopes::GoogleOAuth2APIv2::AuthUserinfoProfile],
+            vec![&tlns_google_oauth2::grouped_scopes::GoogleOAuth2APIv2::AuthUserinfoProfile],
         )
         .map_err(|_| "Failed to build authorization URL")
         .unwrap();
