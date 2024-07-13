@@ -14,6 +14,7 @@ pub struct GoogleOAuth2Client<'b> {
     redirect_uri: std::borrow::Cow<'b, oauth2::RedirectUrl>,
 }
 
+/// Scope types ([`tlns_google_oauth2_traits::ToGoogleScope`])
 pub type Scope = dyn ToGoogleScope + Send + Sync + UnwindSafe + RefUnwindSafe;
 
 /// Authentication stuffs
@@ -51,7 +52,7 @@ impl<'b> GoogleOAuth2Client<'b> {
     /// Or like this!
     /// ```rust
     /// use tlns_google_oauth2::FromGoogleScope;
-    /// vec![&tlns_google_oauth2::grouped_scopes::GoogleOAuth2APIv2::from_google_scope("https://www.googleapis.com/auth/userinfo.profile").unwrap()];
+    /// vec![&tlns_google_oauth2::scopes::Scopes::from_google_scope("https://www.googleapis.com/auth/userinfo.profile").unwrap()];
     /// ```
     /// Or if you are using [`crate::scopes`]
     /// ```rust
