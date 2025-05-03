@@ -336,42 +336,72 @@ Scopes
 https://www.googleapis.com/auth/content	Manage your product listings and accounts for Google Shopping
 Data Portability API, v1
 Scopes
-https://www.googleapis.com/auth/dataportability.businessmessaging.conversations	Move a copy of messages between you and the businesses you have conversations with across Google services.
-https://www.googleapis.com/auth/dataportability.chrome.autofill	Move a copy of the information you entered into online forms in Chrome.
-https://www.googleapis.com/auth/dataportability.chrome.bookmarks	Move a copy of pages you bookmarked in Chrome.
-https://www.googleapis.com/auth/dataportability.chrome.dictionary	Move a copy of words you added to Chrome's dictionary.
-https://www.googleapis.com/auth/dataportability.chrome.extensions	Move a copy of extensions you installed from the Chrome Web Store.
-https://www.googleapis.com/auth/dataportability.chrome.history	Move a copy of sites you visited in Chrome.
-https://www.googleapis.com/auth/dataportability.chrome.reading_list	Move a copy of pages you added to your reading list in Chrome.
-https://www.googleapis.com/auth/dataportability.chrome.settings	Move a copy of your settings in Chrome.
-https://www.googleapis.com/auth/dataportability.maps.commute_routes	Move a copy of your pinned trips on Maps.
-https://www.googleapis.com/auth/dataportability.maps.commute_settings	Move a copy of your commute settings on Maps.
-https://www.googleapis.com/auth/dataportability.maps.ev_profile	Move a copy of your electric vehicle profile on Maps.
-https://www.googleapis.com/auth/dataportability.maps.offering_contributions	Move a copy of your updates to places on Maps.
-https://www.googleapis.com/auth/dataportability.maps.photos_videos	Move a copy of the photos and videos you posted on Maps.
-https://www.googleapis.com/auth/dataportability.maps.reviews	Move a copy of your reviews and posts on Maps.
-https://www.googleapis.com/auth/dataportability.maps.starred_places	Move a copy of your Starred places list on Maps.
-https://www.googleapis.com/auth/dataportability.myactivity.maps	Move a copy of your Maps activity.
-https://www.googleapis.com/auth/dataportability.myactivity.search	Move a copy of your Google Search activity.
-https://www.googleapis.com/auth/dataportability.myactivity.shopping	Move a copy of your Shopping activity.
-https://www.googleapis.com/auth/dataportability.myactivity.youtube	Move a copy of your YouTube activity.
-https://www.googleapis.com/auth/dataportability.saved.collections	Move a copy of your saved links, images, places, and collections from your use of Google services.
-https://www.googleapis.com/auth/dataportability.shopping.addresses	Move a copy of your shipping information on Shopping.
-https://www.googleapis.com/auth/dataportability.shopping.reviews	Move a copy of reviews you wrote about products or online stores on Google Search.
-https://www.googleapis.com/auth/dataportability.youtube.channel	Move a copy of information about your YouTube channel.
-https://www.googleapis.com/auth/dataportability.youtube.comments	Move a copy of your YouTube comments.
-https://www.googleapis.com/auth/dataportability.youtube.live_chat	Move a copy of your YouTube messages in live chat.
-https://www.googleapis.com/auth/dataportability.youtube.music	Move a copy of your uploaded YouTube music tracks and your YouTube music library.
-https://www.googleapis.com/auth/dataportability.youtube.playable	Move a copy of your YouTube playables saved game progress files.
-https://www.googleapis.com/auth/dataportability.youtube.posts	Move a copy of your YouTube posts.
-https://www.googleapis.com/auth/dataportability.youtube.private_playlists	Move a copy of your YouTube private playlists.
-https://www.googleapis.com/auth/dataportability.youtube.private_videos	Move a copy of your private YouTube videos and information about them.
-https://www.googleapis.com/auth/dataportability.youtube.public_playlists	Move a copy of your public YouTube playlists.
-https://www.googleapis.com/auth/dataportability.youtube.public_videos	Move a copy of your public YouTube videos and information about them.
-https://www.googleapis.com/auth/dataportability.youtube.shopping	Move a copy of your YouTube shopping wishlists, and wishlist items.
-https://www.googleapis.com/auth/dataportability.youtube.subscriptions	Move a copy of your YouTube channel subscriptions, even if they're private.
-https://www.googleapis.com/auth/dataportability.youtube.unlisted_playlists	Move a copy of your unlisted YouTube playlists.
-https://www.googleapis.com/auth/dataportability.youtube.unlisted_videos	Move a copy of your unlisted YouTube videos and information about them.
+https://www.googleapis.com/auth/dataportability.alerts.subscriptions	Move a copy of the Google Alerts subscriptions you created
+https://www.googleapis.com/auth/dataportability.businessmessaging.conversations	Move a copy of messages between you and the businesses you have conversations with across Google services
+https://www.googleapis.com/auth/dataportability.chrome.autofill	Move a copy of the information you entered into online forms in Chrome
+https://www.googleapis.com/auth/dataportability.chrome.bookmarks	Move a copy of pages you bookmarked in Chrome
+https://www.googleapis.com/auth/dataportability.chrome.dictionary	Move a copy of words you added to Chrome's dictionary
+https://www.googleapis.com/auth/dataportability.chrome.extensions	Move a copy of extensions you installed from the Chrome Web Store
+https://www.googleapis.com/auth/dataportability.chrome.history	Move a copy of sites you visited in Chrome
+https://www.googleapis.com/auth/dataportability.chrome.reading_list	Move a copy of pages you added to your reading list in Chrome
+https://www.googleapis.com/auth/dataportability.chrome.settings	Move a copy of your settings in Chrome
+https://www.googleapis.com/auth/dataportability.discover.follows	Move a copy of searches and sites you follow, saved by Discover
+https://www.googleapis.com/auth/dataportability.discover.likes	Move a copy of links to your liked documents, saved by Discover
+https://www.googleapis.com/auth/dataportability.discover.not_interested	Move a copy of content you marked as not interested, saved by Discover
+https://www.googleapis.com/auth/dataportability.maps.aliased_places	Move a copy of the places you labeled on Maps
+https://www.googleapis.com/auth/dataportability.maps.commute_routes	Move a copy of your pinned trips on Maps
+https://www.googleapis.com/auth/dataportability.maps.commute_settings	Move a copy of your commute settings on Maps
+https://www.googleapis.com/auth/dataportability.maps.ev_profile	Move a copy of your electric vehicle profile on Maps
+https://www.googleapis.com/auth/dataportability.maps.factual_contributions	Move a copy of the corrections you made to places or map information on Maps
+https://www.googleapis.com/auth/dataportability.maps.offering_contributions	Move a copy of your updates to places on Maps
+https://www.googleapis.com/auth/dataportability.maps.photos_videos	Move a copy of the photos and videos you posted on Maps
+https://www.googleapis.com/auth/dataportability.maps.questions_answers	Move a copy of the questions and answers you posted on Maps
+https://www.googleapis.com/auth/dataportability.maps.reviews	Move a copy of your reviews and posts on Maps
+https://www.googleapis.com/auth/dataportability.maps.starred_places	Move a copy of your Starred places list on Maps
+https://www.googleapis.com/auth/dataportability.myactivity.maps	Move a copy of your Maps activity
+https://www.googleapis.com/auth/dataportability.myactivity.myadcenter	Move a copy of your My Ad Center activity
+https://www.googleapis.com/auth/dataportability.myactivity.play	Move a copy of your Google Play activity
+https://www.googleapis.com/auth/dataportability.myactivity.search	Move a copy of your Google Search activity
+https://www.googleapis.com/auth/dataportability.myactivity.shopping	Move a copy of your Shopping activity
+https://www.googleapis.com/auth/dataportability.myactivity.youtube	Move a copy of your YouTube activity
+https://www.googleapis.com/auth/dataportability.mymaps.maps	Move a copy of the maps you created in My Maps
+https://www.googleapis.com/auth/dataportability.order_reserve.purchases_reservations	Move a copy of your food purchase and reservation activity
+https://www.googleapis.com/auth/dataportability.play.devices	Move a copy of information about your devices with Google Play Store installed
+https://www.googleapis.com/auth/dataportability.play.grouping	Move a copy of your Google Play Store Grouping tags created by app developers
+https://www.googleapis.com/auth/dataportability.play.installs	Move a copy of your Google Play Store app installations
+https://www.googleapis.com/auth/dataportability.play.library	Move a copy of your Google Play Store downloads, including books, games, and apps
+https://www.googleapis.com/auth/dataportability.play.playpoints	Move a copy of information about your Google Play Store Points
+https://www.googleapis.com/auth/dataportability.play.promotions	Move a copy of information about your Google Play Store promotions
+https://www.googleapis.com/auth/dataportability.play.purchases	Move a copy of your Google Play Store purchases
+https://www.googleapis.com/auth/dataportability.play.redemptions	Move a copy of your Google Play Store redemption activities
+https://www.googleapis.com/auth/dataportability.play.subscriptions	Move a copy of your Google Play Store subscriptions
+https://www.googleapis.com/auth/dataportability.play.usersettings	Move a copy of your Google Play Store user settings and preferences
+https://www.googleapis.com/auth/dataportability.saved.collections	Move a copy of your saved links, images, places, and collections from your use of Google services
+https://www.googleapis.com/auth/dataportability.search_ugc.comments	Move a copy of your comments on Google Search
+https://www.googleapis.com/auth/dataportability.search_ugc.media.reviews_and_stars	Move a copy of your media reviews on Google Search
+https://www.googleapis.com/auth/dataportability.search_ugc.media.streaming_video_providers	Move a copy of your self-reported video streaming provider preferences from Google Search and Google TV
+https://www.googleapis.com/auth/dataportability.search_ugc.media.thumbs	Move a copy of your indicated thumbs up and thumbs down on media in Google Search and Google TV
+https://www.googleapis.com/auth/dataportability.search_ugc.media.watched	Move a copy of information about the movies and TV shows you marked as watched on Google Search and Google TV
+https://www.googleapis.com/auth/dataportability.searchnotifications.settings	Move a copy of your notification settings on the Google Search app
+https://www.googleapis.com/auth/dataportability.searchnotifications.subscriptions	Move a copy of your notification subscriptions on Google Search app
+https://www.googleapis.com/auth/dataportability.shopping.addresses	Move a copy of your shipping information on Shopping
+https://www.googleapis.com/auth/dataportability.shopping.reviews	Move a copy of reviews you wrote about products or online stores on Google Search
+https://www.googleapis.com/auth/dataportability.streetview.imagery	Move a copy of the images and videos you uploaded to Street View
+https://www.googleapis.com/auth/dataportability.youtube.channel	Move a copy of information about your YouTube channel
+https://www.googleapis.com/auth/dataportability.youtube.clips	Move a copy of your YouTube clips metadata
+https://www.googleapis.com/auth/dataportability.youtube.comments	Move a copy of your YouTube comments
+https://www.googleapis.com/auth/dataportability.youtube.live_chat	Move a copy of your YouTube messages in live chat
+https://www.googleapis.com/auth/dataportability.youtube.music	Move a copy of your uploaded YouTube music tracks and your YouTube music library
+https://www.googleapis.com/auth/dataportability.youtube.playable	Move a copy of your YouTube playables saved game progress files
+https://www.googleapis.com/auth/dataportability.youtube.posts	Move a copy of your YouTube posts
+https://www.googleapis.com/auth/dataportability.youtube.private_playlists	Move a copy of your YouTube private playlists
+https://www.googleapis.com/auth/dataportability.youtube.private_videos	Move a copy of your private YouTube videos and information about them
+https://www.googleapis.com/auth/dataportability.youtube.public_playlists	Move a copy of your public YouTube playlists
+https://www.googleapis.com/auth/dataportability.youtube.public_videos	Move a copy of your public YouTube videos and information about them
+https://www.googleapis.com/auth/dataportability.youtube.shopping	Move a copy of your YouTube shopping wishlists, and wishlist items
+https://www.googleapis.com/auth/dataportability.youtube.subscriptions	Move a copy of your YouTube channel subscriptions, even if they're private
+https://www.googleapis.com/auth/dataportability.youtube.unlisted_playlists	Move a copy of your unlisted YouTube playlists
+https://www.googleapis.com/auth/dataportability.youtube.unlisted_videos	Move a copy of your unlisted YouTube videos and information about them
 Dataflow API, v1b3
 Scopes
 https://www.googleapis.com/auth/cloud-platform	See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
@@ -382,6 +412,12 @@ Drive Activity API, v2
 Scopes
 https://www.googleapis.com/auth/drive.activity	View and add to the activity record of files in your Google Drive
 https://www.googleapis.com/auth/drive.activity.readonly	View the activity record of files in your Google Drive
+Drive Labels API, v2
+Scopes
+https://www.googleapis.com/auth/drive.admin.labels	See, edit, create, and delete all Google Drive labels in your organization, and see your organization's label-related admin policies
+https://www.googleapis.com/auth/drive.admin.labels.readonly	See all Google Drive labels and label-related admin policies in your organization
+https://www.googleapis.com/auth/drive.labels	See, edit, create, and delete your Google Drive labels
+https://www.googleapis.com/auth/drive.labels.readonly	See your Google Drive labels
 Enterprise License Manager API, v1
 Scopes
 https://www.googleapis.com/auth/apps.licensing	View and manage G Suite licenses for your domain
@@ -390,7 +426,7 @@ Scopes
 https://www.googleapis.com/auth/cloud-platform	See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
 Fact Check Tools API, v1alpha1
 Scopes
-https://www.googleapis.com/auth/userinfo.email	See your primary Google Account email address
+https://www.googleapis.com/auth/factchecktools	Read, create, update, and delete your ClaimReview data.
 Firebase Cloud Messaging API, v1
 Scopes
 https://www.googleapis.com/auth/cloud-platform	See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
@@ -453,6 +489,9 @@ https://www.googleapis.com/auth/gmail.readonly	View your email messages and sett
 https://www.googleapis.com/auth/gmail.send	Send email on your behalf
 https://www.googleapis.com/auth/gmail.settings.basic	See, edit, create, or change your email settings and filters in Gmail
 https://www.googleapis.com/auth/gmail.settings.sharing	Manage your sensitive mail settings, including who can manage your mail
+Gmail Postmaster Tools API, v1
+Scopes
+https://www.googleapis.com/auth/postmaster.readonly	See email traffic metrics for the domains you have registered in Gmail Postmaster Tools
 Google Analytics API, v3
 Scopes
 https://www.googleapis.com/auth/analytics	View and manage your Google Analytics data
@@ -464,19 +503,31 @@ https://www.googleapis.com/auth/analytics.readonly	View your Google Analytics da
 https://www.googleapis.com/auth/analytics.user.deletion	Manage Google Analytics user deletion requests
 Google Chat API, v1
 Scopes
-https://www.googleapis.com/auth/chat.delete	Delete conversations and spaces & remove access to associated files in Google Chat
-https://www.googleapis.com/auth/chat.memberships	View, add, and remove members from conversations in Google Chat
-https://www.googleapis.com/auth/chat.memberships.app	Add and remove itself from conversations in Google Chat
+https://www.googleapis.com/auth/chat.admin.delete	Delete conversations and spaces owned by your organization and remove access to associated files in Google Chat
+https://www.googleapis.com/auth/chat.admin.memberships	View, add, update and remove members and managers in conversations owned by your organization
+https://www.googleapis.com/auth/chat.admin.memberships.readonly	View members and managers in conversations owned by your organization
+https://www.googleapis.com/auth/chat.admin.spaces	View or edit display name, description, and other metadata for all Google Chat conversations owned by your organization
+https://www.googleapis.com/auth/chat.admin.spaces.readonly	View display name, description, and other metadata for all Google Chat conversations owned by your organization
+https://www.googleapis.com/auth/chat.app.delete	On their own behalf, apps in Google Chat can delete conversations and spaces and remove access to associated files
+https://www.googleapis.com/auth/chat.app.memberships	On their own behalf, apps in Google Chat can see, add, update, and remove members from conversations and spaces
+https://www.googleapis.com/auth/chat.app.spaces	On their own behalf, apps in Google Chat can create conversations and spaces and see or update their metadata (including history settings and access settings)
+https://www.googleapis.com/auth/chat.app.spaces.create	On their own behalf, apps in Google Chat can create conversations and spaces
+https://www.googleapis.com/auth/chat.delete	Delete conversations and spaces and remove access to associated files in Google Chat
+https://www.googleapis.com/auth/chat.import	Import spaces, messages, and memberships into Google Chat.
+https://www.googleapis.com/auth/chat.memberships	See, add, update, and remove members from conversations and spaces in Google Chat
+https://www.googleapis.com/auth/chat.memberships.app	Add and remove itself from conversations and spaces in Google Chat
 https://www.googleapis.com/auth/chat.memberships.readonly	View members in Google Chat conversations.
-https://www.googleapis.com/auth/chat.messages	View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.
+https://www.googleapis.com/auth/chat.messages	See, compose, send, update, and delete messages as well as their message content; add, see, and delete reactions to messages.
 https://www.googleapis.com/auth/chat.messages.create	Compose and send messages in Google Chat
-https://www.googleapis.com/auth/chat.messages.reactions	View, add, and delete reactions to messages in Google Chat
+https://www.googleapis.com/auth/chat.messages.reactions	See, add, and delete reactions as well as their reaction content to messages in Google Chat
 https://www.googleapis.com/auth/chat.messages.reactions.create	Add reactions to messages in Google Chat
-https://www.googleapis.com/auth/chat.messages.reactions.readonly	View reactions to messages in Google Chat
-https://www.googleapis.com/auth/chat.messages.readonly	View messages and reactions in Google Chat
-https://www.googleapis.com/auth/chat.spaces	Create conversations and spaces and view or update metadata (including history settings) in Google Chat
-https://www.googleapis.com/auth/chat.spaces.create	Create new conversations in Google Chat
+https://www.googleapis.com/auth/chat.messages.reactions.readonly	View reactions as well as their reaction content to messages in Google Chat
+https://www.googleapis.com/auth/chat.messages.readonly	See messages as well as their reactions and message content in Google Chat
+https://www.googleapis.com/auth/chat.spaces	Create conversations and spaces and see or update metadata (including history settings and access settings) in Google Chat
+https://www.googleapis.com/auth/chat.spaces.create	Create new conversations and spaces in Google Chat
 https://www.googleapis.com/auth/chat.spaces.readonly	View chat and spaces in Google Chat
+https://www.googleapis.com/auth/chat.users.readstate	View and modify last read time for Google Chat conversations
+https://www.googleapis.com/auth/chat.users.readstate.readonly	View last read time for Google Chat conversations
 Google Classroom API, v1
 Scopes
 https://www.googleapis.com/auth/classroom.announcements	View and manage announcements in Google Classroom
@@ -518,16 +569,34 @@ Google Drive API, v3
 Scopes
 https://www.googleapis.com/auth/drive	See, edit, create, and delete all of your Google Drive files
 https://www.googleapis.com/auth/drive.appdata	See, create, and delete its own configuration data in your Google Drive
+https://www.googleapis.com/auth/drive.apps.readonly	View your Google Drive apps
 https://www.googleapis.com/auth/drive.file	See, edit, create, and delete only the specific Google Drive files you use with this app
+https://www.googleapis.com/auth/drive.meet.readonly	See and download your Google Drive files that were created or edited by Google Meet.
 https://www.googleapis.com/auth/drive.metadata	View and manage metadata of files in your Google Drive
 https://www.googleapis.com/auth/drive.metadata.readonly	See information about your Google Drive files
 https://www.googleapis.com/auth/drive.photos.readonly	View the photos, videos and albums in your Google Photos
 https://www.googleapis.com/auth/drive.readonly	See and download all your Google Drive files
 https://www.googleapis.com/auth/drive.scripts	Modify your Google Apps Script scripts' behavior
+Google Forms API, v1
+Scopes
+https://www.googleapis.com/auth/drive	See, edit, create, and delete all of your Google Drive files
+https://www.googleapis.com/auth/drive.file	See, edit, create, and delete only the specific Google Drive files you use with this app
+https://www.googleapis.com/auth/drive.readonly	See and download all your Google Drive files
+https://www.googleapis.com/auth/forms.body	See, edit, create, and delete all your Google Forms forms
+https://www.googleapis.com/auth/forms.body.readonly	See all your Google Forms forms
+https://www.googleapis.com/auth/forms.responses.readonly	See all responses to your Google Forms forms
 Google Identity Toolkit API, v3
 Scopes
 https://www.googleapis.com/auth/cloud-platform	View and manage your data across Google Cloud Platform services
 https://www.googleapis.com/auth/firebase	View and administer all your Firebase data and settings
+Google Keep API, v1
+Scopes
+https://www.googleapis.com/auth/keep	See, edit, create and permanently delete all your Google Keep data
+https://www.googleapis.com/auth/keep.readonly	View all your Google Keep data
+Google Meet API, v2
+Scopes
+https://www.googleapis.com/auth/meetings.space.created	Create, edit, and see information about your Google Meet conferences created by the app.
+https://www.googleapis.com/auth/meetings.space.readonly	Read information about any of your Google Meet conferences
 Google OAuth2 API, v2
 Scopes
 https://www.googleapis.com/auth/userinfo.email	See your primary Google Account email address
@@ -592,6 +661,18 @@ https://www.googleapis.com/auth/ediscovery.readonly	View your eDiscovery data
 Google Workspace Alert Center API, v1beta1
 Scopes
 https://www.googleapis.com/auth/apps.alerts	See and delete your domain's G Suite alerts, and send alert feedback
+Google Workspace Events API, v1
+Scopes
+https://www.googleapis.com/auth/chat.memberships	See, add, update, and remove members from conversations and spaces in Google Chat
+https://www.googleapis.com/auth/chat.memberships.readonly	View members in Google Chat conversations.
+https://www.googleapis.com/auth/chat.messages	See, compose, send, update, and delete messages and their associated attachments, and add, see, and delete reactions to messages.
+https://www.googleapis.com/auth/chat.messages.reactions	See, add, and delete reactions to messages in Google Chat
+https://www.googleapis.com/auth/chat.messages.reactions.readonly	View reactions to messages in Google Chat
+https://www.googleapis.com/auth/chat.messages.readonly	See messages and their associated reactions and attachments in Google Chat
+https://www.googleapis.com/auth/chat.spaces	Create conversations and spaces and see or update metadata (including history settings and access settings) in Google Chat
+https://www.googleapis.com/auth/chat.spaces.readonly	View chat and spaces in Google Chat
+https://www.googleapis.com/auth/meetings.space.created	Create, edit, and see information about your Google Meet conferences created by the app.
+https://www.googleapis.com/auth/meetings.space.readonly	Read information about any of your Google Meet conferences
 Google Workspace Reseller API, v1
 Scopes
 https://www.googleapis.com/auth/apps.order	Manage users on your domain

@@ -1,26 +1,24 @@
 #![doc = include_str!("../README.md")]
 
-use core::panic::{RefUnwindSafe, UnwindSafe};
-
-use oauth2::{self, basic::BasicTokenType, CsrfToken, EmptyExtraTokenFields};
+use oauth2::{self, basic::{BasicErrorResponse, BasicRevocationErrorResponse, BasicTokenIntrospectionResponse, BasicTokenResponse, BasicTokenType}, CsrfToken, EmptyExtraTokenFields, EndpointNotSet, EndpointSet, StandardRevocableToken};
 
 pub mod grouped_scopes;
 pub mod scopes;
 pub use tlns_google_oauth2_traits::{FromGoogleScope, ToGoogleScope};
 
 /// A thin wrapper around [`oauth2`] for Google OAuth2.
-pub struct GoogleOAuth2Client<'b> {
-    client: oauth2::basic::BasicClient,
-    redirect_uri: std::borrow::Cow<'b, oauth2::RedirectUrl>,
+pub struct GoogleOAuth2Client {
+    client: oauth2::Client<BasicErrorResponse,
+    BasicTokenResponse,
+    BasicTokenIntrospectionResponse,
+    StandardRevocableToken,
+    BasicRevocationErrorResponse, EndpointSet, EndpointNotSet, EndpointNotSet, EndpointNotSet, EndpointSet>,
 }
 
-/// Scope types ([`tlns_google_oauth2_traits::ToGoogleScope`])
-pub type Scope = dyn ToGoogleScope + Send + Sync + UnwindSafe + RefUnwindSafe;
-
 /// Authentication stuffs
-pub struct Authentication<'a>(pub String, pub CsrfToken, pub Vec<&'a Scope>);
+pub struct Authentication<'a>(pub String, pub CsrfToken, pub Vec<&'a dyn ToGoogleScope>);
 
-impl<'b> GoogleOAuth2Client<'b> {
+impl GoogleOAuth2Client {
     /// Create new [`crate::GoogleOAuth2Client`] instance
     pub fn new(
         client_id: String,
@@ -31,15 +29,12 @@ impl<'b> GoogleOAuth2Client<'b> {
         Ok(Self {
             client: oauth2::basic::BasicClient::new(
                 oauth2::ClientId::new(client_id),
-                Some(oauth2::ClientSecret::new(client_secret)),
-                oauth2::AuthUrl::new("https://accounts.google.com/o/oauth2/v2/auth".to_string())
-                    .unwrap(),
-                Some(
-                    oauth2::TokenUrl::new("https://oauth2.googleapis.com/token".to_string())
-                        .unwrap(),
-                ),
-            ),
-            redirect_uri: std::borrow::Cow::Owned(url),
+            ).set_client_secret(oauth2::ClientSecret::new(client_secret))
+            .set_auth_uri(oauth2::AuthUrl::new("https://accounts.google.com/o/oauth2/v2/auth".to_string())
+            .unwrap())
+            .set_token_uri(oauth2::TokenUrl::new("https://oauth2.googleapis.com/token".to_string())
+            .unwrap())
+            .set_redirect_uri(url),
         })
     }
 
@@ -61,7 +56,7 @@ impl<'b> GoogleOAuth2Client<'b> {
     pub fn authorize_url<'a>(
         &self,
         csrf_token: Option<fn() -> CsrfToken>,
-        scopes: Vec<&'a Scope>,
+        scopes: Vec<&'a dyn ToGoogleScope>,
     ) -> Result<Authentication<'a>, String> {
         let auth_req = self
             .client
@@ -70,8 +65,7 @@ impl<'b> GoogleOAuth2Client<'b> {
                 scopes
                     .iter()
                     .map(|e| oauth2::Scope::new(e.to_google_scope().to_string())),
-            )
-            .set_redirect_uri(self.redirect_uri.clone());
+            );
 
         let res = auth_req.url();
         Ok(Authentication(res.0.to_string(), res.1, scopes))
@@ -81,12 +75,13 @@ impl<'b> GoogleOAuth2Client<'b> {
     pub async fn get_token(
         &self,
         auth_code: String,
+        http_client: Option<oauth2::reqwest::Client>,
     ) -> Result<oauth2::StandardTokenResponse<EmptyExtraTokenFields, BasicTokenType>, String> {
+        let http_client = http_client.unwrap_or(oauth2::reqwest::Client::new());
         let res = self
             .client
             .exchange_code(oauth2::AuthorizationCode::new(auth_code))
-            .set_redirect_uri(self.redirect_uri.clone())
-            .request_async(oauth2::reqwest::async_http_client)
+            .request_async(&http_client)
             .await
             .map_err(|e| e.to_string())?;
         Ok(res)

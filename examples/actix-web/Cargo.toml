@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 actix-web = { version = "4.8.0", features = ["cookies"] }
 better-panic = "0.3.0"
-oauth2 = "4.4.2"
+oauth2 = "5.0.0"
 reqwest = { version = "0.12.5", features = ["json"] }
 serde_json = "1.0.118"
 tlns-google-oauth2 = { path = "../../tlns-google-oauth2" }

@@ -1,6 +1,6 @@
 [package]
 name = "tlns-google-oauth2"
-version = "0.4.1"
+version = "0.5.0"
 edition = "2021"
 description = "An enshitificated Google OAuth2 Server Side support for Rust with built in Scopes enum"
 license = "MIT"
@@ -12,7 +12,7 @@ readme = "./README.md"
 path = "./src/lib.rs"
 
 [dependencies]
-oauth2 = { version = "4.4.2", features = ["reqwest"] }
+oauth2 = { version = "5.0.0", features = ["reqwest"] }
 tlns-google-oauth2-proc = "0.2.1"
 tlns-google-oauth2-traits = "0.1.1"
 

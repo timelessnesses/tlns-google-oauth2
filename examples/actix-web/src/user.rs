@@ -5,7 +5,7 @@ use oauth2::TokenResponse;
 
 #[actix_web::get("/auth/{user_id}")]
 async fn user_auth(
-    oauth_client: web::Data<tlns_google_oauth2::GoogleOAuth2Client<'_>>,
+    oauth_client: web::Data<tlns_google_oauth2::GoogleOAuth2Client>,
     user_id: web::Path<String>,
 ) -> actix_web::Result<impl Responder> {
     let auth = oauth_client
@@ -27,14 +27,14 @@ async fn user_auth(
 
 #[actix_web::get("/callback")]
 async fn user_cb(
-    oauth_client: web::Data<tlns_google_oauth2::GoogleOAuth2Client<'_>>,
+    oauth_client: web::Data<tlns_google_oauth2::GoogleOAuth2Client>,
     db: web::Data<Arc<RwLock<HashMap<String, String>>>>,
     queries: web::Query<HashMap<String, String>>,
     req: actix_web::HttpRequest,
 ) -> impl Responder {
     let code = queries.get("code").expect("No code authentication?");
     let token = oauth_client
-        .get_token(code.to_string())
+        .get_token(code.to_string(), None)
         .await
         .expect("Google OAuth2 server sent a not successful response");
     let user_id = req
