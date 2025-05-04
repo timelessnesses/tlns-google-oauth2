@@ -1989,7 +1989,7 @@ dependencies = [
 
 [[package]]
 name = "tlns-google-oauth2"
-version = "0.5.2"
+version = "0.5.3"
 dependencies = [
  "oauth2",
  "pollster",
