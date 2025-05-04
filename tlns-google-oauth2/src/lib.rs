@@ -95,7 +95,7 @@ impl GoogleOAuth2Client {
         &self,
         csrf_token: Option<fn() -> CsrfToken>,
         scopes: &'a [&'a dyn ToGoogleScope],
-    ) -> Result<Authentication<'a>, String> {
+    ) -> Authentication<'a> {
         let auth_req = self
             .client
             .authorize_url(csrf_token.unwrap_or(CsrfToken::new_random))
@@ -106,26 +106,34 @@ impl GoogleOAuth2Client {
             );
 
         let res = auth_req.url();
-        Ok(Authentication {
+        Authentication {
             redirect_url: res.0.to_string(),
             csrf_token: res.1,
             scopes,
-        })
+        }
     }
 
     /// Get authentication tokens from provider with authenticated code from Google
     pub async fn get_token(
         &self,
         auth_code: impl Into<String>,
-        http_client: Option<oauth2::reqwest::Client>,
-    ) -> Result<oauth2::StandardTokenResponse<EmptyExtraTokenFields, BasicTokenType>, String> {
-        let http_client = http_client.unwrap_or(oauth2::reqwest::Client::new());
+        http_client: Option<&oauth2::reqwest::Client>,
+    ) -> Result<
+        oauth2::StandardTokenResponse<EmptyExtraTokenFields, BasicTokenType>,
+        oauth2::RequestTokenError<
+            oauth2::HttpClientError<oauth2::reqwest::Error>,
+            oauth2::StandardErrorResponse<oauth2::basic::BasicErrorResponseType>,
+        >,
+    > {
+        // i love you rust
+        let http_client = http_client
+            .map(|i| std::borrow::Cow::Borrowed(i))
+            .unwrap_or(std::borrow::Cow::Owned(oauth2::reqwest::Client::new()));
         let res = self
             .client
             .exchange_code(oauth2::AuthorizationCode::new(auth_code.into()))
-            .request_async(&http_client)
-            .await
-            .map_err(|e| e.to_string())?;
+            .request_async(http_client.as_ref())
+            .await?;
         Ok(res)
     }
 }
