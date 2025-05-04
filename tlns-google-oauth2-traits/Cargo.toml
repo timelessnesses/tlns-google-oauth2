@@ -1,6 +1,6 @@
 [package]
 name = "tlns-google-oauth2-traits"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 description = "A bunch of traits for `tlns-google-oauth2-traits`"
 license = "MIT"

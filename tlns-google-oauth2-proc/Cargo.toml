@@ -1,6 +1,6 @@
 [package]
 name = "tlns-google-oauth2-proc"
-version = "0.2.2"
+version = "0.2.3"
 edition = "2021"
 repository = "https://github.com/timelessnesses/tlns-google-oauth2"
 documentation = "https://docs.rs/tlns-google-oauth2-proc"
