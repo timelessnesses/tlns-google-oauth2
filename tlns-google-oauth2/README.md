@@ -11,39 +11,51 @@ Then pasting all of that to the `info.txt` and build the library, it will give y
 
 ## Usage ([`crate::grouped_scopes`])
 
-```rust,ignore
-use tlns_google_oauth2::GoogleOAuth2Client as Client;
-use tlns_google_oauth2::scopes;
-let client = Client::new("CLIENT_ID".to_string(), "CLIENT_SECRET".to_string(), "http://localhost:8080/callback".to_string()).expect("Failed to build client");
-let auth = client.authorize_url(None, vec![&scopes::GoogleOAuth2APIv2::AuthUserinfoProfile]).unwrap();
-let url = auth.0;
-let csrf_token = auth.1;
-let scopes = auth.2;
+```rust,should_panic
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    use tlns_google_oauth2::GoogleOAuth2Client as Client;
+    use tlns_google_oauth2::grouped_scopes;
+    use pollster::FutureExt as _;
 
-// ... Callback codes here (You can't save states in oauth2 crate for some reasons :( )
+    let client = Client::new("CLIENT_ID", "CLIENT_SECRET", "http://localhost:8080/callback")?;
+    let auth = client.build_authorize_url(None, &[&grouped_scopes::GoogleOAuth2APIv2::AuthUserinfoProfile]);
+    let url = auth.redirect_url;
+    let csrf_token = auth.csrf_token;
+    let scopes = auth.scopes;
 
-let code = "...";
-let token = client.get_token(code.to_string()).await.unwrap();
-// Do request stuff
+    // ... Callback codes here (You can't save states in oauth2 crate for some reasons :( )
+
+    let code = "...";
+    let token = client.get_token(code, None).block_on()?;
+    // Do request stuff
+    Ok(())
+}
 ```
 
 ## Usage ([`crate::scopes::Scopes`])
 
-```rust,ignore
-use tlns_google_oauth2::GoogleOAuth2Client as Client;
-use tlns_google_oauth2::scopes;
-let client = Client::new("CLIENT_ID".to_string(), "CLIENT_SECRET".to_string(), "http://localhost:8080/callback".to_string()).expect("Failed to build client");
-let auth = client.authorize_url(None, vec![&scopes::Scopes::AuthUserinfoProfile]).unwrap();
-let url = auth.0;
-let csrf_token = auth.1;
-let scopes = auth.2;
+```rust,should_panic
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    use tlns_google_oauth2::GoogleOAuth2Client as Client;
+    use tlns_google_oauth2::scopes;
+    use pollster::FutureExt as _;
 
-// ... Callback codes here (You can't save states in oauth2 crate for some reasons :( )
+    let client = Client::new("CLIENT_ID", "CLIENT_SECRET", "http://localhost:8080/callback")?;
+    let auth = client.build_authorize_url(None, &[&scopes::Scopes::AuthUserinfoProfile]);
+    let url = auth.redirect_url;
+    let csrf_token = auth.csrf_token;
+    let scopes = auth.scopes;
 
-let code = "...";
-let token = client.get_token(code.to_string()).await.unwrap();
+    // ... Callback codes here (You can't save states in oauth2 crate for some reasons :( )
+
+    let code = "...";
+    let token = client.get_token(code, None).block_on()?;
+    Ok(())
 // Do request stuff
+}
 ```
+
+Yes, you can mix and match the slice with anything that implements [`ToGoogleScope`] trait.
 
 ## Credits
 

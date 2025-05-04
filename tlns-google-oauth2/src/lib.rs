@@ -47,7 +47,7 @@ pub struct Authentication<'a> {
     pub redirect_url: String,
     /// CSRF token
     pub csrf_token: CsrfToken,
-    /// Scopes that you used in [`crate::GoogleOAuth2Client::authorize_url`]
+    /// Scopes that you used in [`crate::GoogleOAuth2Client::build_authorize_url`]
     pub scopes: &'a [&'a dyn ToGoogleScope],
 }
 
