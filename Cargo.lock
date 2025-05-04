@@ -132,18 +132,6 @@ dependencies = [
 
 [[package]]
 name = "actix-web"
-version = "0.1.0"
-dependencies = [
- "actix-web 4.10.2",
- "better-panic",
- "oauth2",
- "reqwest",
- "serde_json",
- "tlns-google-oauth2",
-]
-
-[[package]]
-name = "actix-web"
 version = "4.10.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f2e3b15b3dc6c6ed996e4032389e9849d4ab002b1e92fbfe85b5f307d1479b4d"
@@ -195,6 +183,18 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
+]
+
+[[package]]
+name = "actix-web-example"
+version = "0.1.0"
+dependencies = [
+ "actix-web",
+ "better-panic",
+ "oauth2",
+ "reqwest",
+ "serde_json",
+ "tlns-google-oauth2",
 ]
 
 [[package]]
@@ -1986,21 +1986,8 @@ name = "tlns-google-oauth2"
 version = "0.5.0"
 dependencies = [
  "oauth2",
- "tlns-google-oauth2-proc 0.2.1",
- "tlns-google-oauth2-traits 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "tlns-google-oauth2-proc"
-version = "0.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "246024dd5e7c1da821bf3143eaa1c5d8bf46fe0369738fd53fbe7281cb1e0d71"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn",
- "titlecase",
- "url",
+ "tlns-google-oauth2-proc",
+ "tlns-google-oauth2-traits",
 ]
 
 [[package]]
@@ -2016,13 +2003,7 @@ dependencies = [
 
 [[package]]
 name = "tlns-google-oauth2-traits"
-version = "0.1.1"
-
-[[package]]
-name = "tlns-google-oauth2-traits"
-version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "691b5d7df43a73f965570fbbcda46b4ba393bfc52ec476d7eefce65cad160a07"
+version = "0.1.2"
 
 [[package]]
 name = "tokio"

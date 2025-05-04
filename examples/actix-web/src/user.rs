@@ -1,7 +1,7 @@
 use actix_web::{web, HttpResponse, Responder};
+use oauth2::TokenResponse;
 use std::collections::HashMap;
 use std::sync::{Arc, RwLock};
-use oauth2::TokenResponse;
 
 #[actix_web::get("/auth/{user_id}")]
 async fn user_auth(
@@ -11,7 +11,7 @@ async fn user_auth(
     let auth = oauth_client
         .authorize_url(
             None,
-            vec![&tlns_google_oauth2::grouped_scopes::GoogleOAuth2APIv2::AuthUserinfoProfile],
+            &[&tlns_google_oauth2::grouped_scopes::GoogleOAuth2APIv2::AuthUserinfoProfile, &tlns_google_oauth2::scopes::Scopes::AuthUserinfoProfile],
         )
         .map_err(|_| "Failed to build authorization URL")
         .unwrap();
@@ -20,7 +20,7 @@ async fn user_auth(
     c.set_path("/callback");
     c.set_secure(Some(false));
     Ok(HttpResponse::Found()
-        .append_header(("Location", auth.0))
+        .append_header(("Location", auth.redirect_url))
         .cookie(c)
         .finish())
 }
@@ -55,7 +55,10 @@ async fn user_cb(
     let rname = jsonized["name"].as_str().or(None);
     match rname {
         Some(n) => {
-            db.write().unwrap().entry(user_id.clone()).or_insert(n.to_string());
+            db.write()
+                .unwrap()
+                .entry(user_id.clone())
+                .or_insert(n.to_string());
             HttpResponse::Found()
                 .append_header(("Location", "http://localhost:5500"))
                 .cookie({

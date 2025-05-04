@@ -1,5 +1,5 @@
-use std::{collections::HashMap, sync::RwLock};
 use better_panic;
+use std::{collections::HashMap, sync::RwLock};
 
 use actix_web;
 
@@ -7,7 +7,9 @@ mod user;
 
 #[actix_web::main]
 async fn main() {
-    better_panic::Settings::new().verbosity(better_panic::Verbosity::Full).install();
+    better_panic::Settings::new()
+        .verbosity(better_panic::Verbosity::Full)
+        .install();
     let db = std::sync::Arc::new(RwLock::new(HashMap::<String, String>::new()));
     let server = actix_web::HttpServer::new(move || {
         actix_web::App::new()
