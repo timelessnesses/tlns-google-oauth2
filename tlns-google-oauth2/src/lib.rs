@@ -11,9 +11,16 @@ use oauth2::{
     CsrfToken, EmptyExtraTokenFields, EndpointNotSet, EndpointSet, StandardRevocableToken,
 };
 
-pub mod grouped_scopes;
-pub mod scopes;
 pub use tlns_google_oauth2_traits::{FromGoogleScope, ToGoogleScope};
+
+#[cfg(feature = "grouped-scopes")]
+pub mod grouped_scopes;
+
+#[cfg(feature = "scopes")]
+pub mod scopes;
+
+#[cfg(not(any(feature = "grouped-scopes", feature = "scopes")))]
+compile_error!("You must enable either `grouped-scopes` or `scopes` feature");
 
 /// A thin wrapper around [`oauth2`] for Google OAuth2.
 #[derive(Clone, Debug)]

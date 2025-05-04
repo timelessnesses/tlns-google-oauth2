@@ -13,8 +13,8 @@ path = "./src/lib.rs"
 
 [dependencies]
 oauth2 = { version = "5.0.0", features = ["reqwest"] }
-tlns-google-oauth2-proc = { path = "../tlns-google-oauth2-proc", version = "*"}
-tlns-google-oauth2-traits = { path = "../tlns-google-oauth2-traits", version = "*"}
+tlns-google-oauth2-proc = { path = "../tlns-google-oauth2-proc", version = "0.2.2"}
+tlns-google-oauth2-traits = { path = "../tlns-google-oauth2-traits", version = "0.1.2"}
 
 [features]
 grouped-scopes = []
