@@ -8,7 +8,7 @@ async fn user_auth(
     oauth_client: web::Data<tlns_google_oauth2::GoogleOAuth2Client>,
     user_id: web::Path<String>,
 ) -> actix_web::Result<impl Responder> {
-    let auth = oauth_client.authorize_url(
+    let auth = oauth_client.build_authorize_url(
         None,
         &[
             &tlns_google_oauth2::grouped_scopes::GoogleOAuth2APIv2::AuthUserinfoProfile,

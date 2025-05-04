@@ -149,6 +149,7 @@ pub fn generate_grouped_scopes_enums(_: TokenStream) -> TokenStream {
 pub fn generate_scopes_enums(_: TokenStream) -> TokenStream {
     let trait_for_scopes = quote! {
         use tlns_google_oauth2_traits::{*};
+        use std::str::FromStr;
     };
 
     let content = include_str!("../info.txt");
@@ -234,10 +235,12 @@ pub fn generate_scopes_enums(_: TokenStream) -> TokenStream {
                 }
             });
 
+    let cloned_from_google_scope_impl = from_google_scope_impl.clone();
+
     let expanded = quote! {
         #trait_for_scopes
 
-        #[derive(Debug, PartialEq)]
+        #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
         pub enum Scopes {
             #(#enum_variants)*
         }
@@ -254,6 +257,17 @@ pub fn generate_scopes_enums(_: TokenStream) -> TokenStream {
             fn from_google_scope(google_scope: &str) -> Result<Scopes, ()> {
                 match google_scope {
                     #(#from_google_scope_impl)*
+                    _ => Err(()),
+                }
+            }
+        }
+
+        impl FromStr for Scopes {
+            type Err = ();
+
+            fn from_str(s: &str) -> Result<Self, Self::Err> {
+                match s {
+                    #(#cloned_from_google_scope_impl)*
                     _ => Err(()),
                 }
             }

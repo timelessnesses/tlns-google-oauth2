@@ -19,4 +19,7 @@ tlns-google-oauth2-traits = { path = "../tlns-google-oauth2-traits", version = "
 [features]
 grouped-scopes = []
 scopes = []
-default = ["grouped-scopes"]
+default = ["grouped-scopes", "scopes"]
+
+[package.metadata."docs.rs"]
+all-features = true

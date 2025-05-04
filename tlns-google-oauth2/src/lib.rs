@@ -20,7 +20,7 @@ pub mod grouped_scopes;
 pub mod scopes;
 
 #[cfg(not(any(feature = "grouped-scopes", feature = "scopes")))]
-compile_error!("You must enable either `grouped-scopes` or `scopes` feature");
+compile_error!("You must enable either `grouped-scopes` or `scopes` feature to use this crate.");
 
 /// A thin wrapper around [`oauth2`] for Google OAuth2.
 #[derive(Clone, Debug)]
@@ -84,14 +84,17 @@ impl GoogleOAuth2Client {
     /// ```
     /// Or like this!
     /// ```rust
+    /// use std::str::FromStr;
     /// use tlns_google_oauth2::FromGoogleScope;
     /// &[&tlns_google_oauth2::scopes::Scopes::from_google_scope("https://www.googleapis.com/auth/userinfo.profile").unwrap()];
+    /// // or
+    /// &[&tlns_google_oauth2::scopes::Scopes::from_str("https://www.googleapis.com/auth/userinfo.profile").unwrap()];
     /// ```
     /// Or if you are using [`crate::scopes`]
     /// ```rust
     /// &[&tlns_google_oauth2::scopes::Scopes::AuthUserinfoProfile];
     /// ```
-    pub fn authorize_url<'a>(
+    pub fn build_authorize_url<'a>(
         &self,
         csrf_token: Option<fn() -> CsrfToken>,
         scopes: &'a [&'a dyn ToGoogleScope],
@@ -114,6 +117,7 @@ impl GoogleOAuth2Client {
     }
 
     /// Get authentication tokens from provider with authenticated code from Google
+    /// Typically you will get it from the query string of the redirected URL
     pub async fn get_token(
         &self,
         auth_code: impl Into<String>,
@@ -132,6 +136,31 @@ impl GoogleOAuth2Client {
         let res = self
             .client
             .exchange_code(oauth2::AuthorizationCode::new(auth_code.into()))
+            .request_async(http_client.as_ref())
+            .await?;
+        Ok(res)
+    }
+
+    /// Refresh your token in case it has expired
+    /// You can retrieve it from [`oauth2::StandardTokenResponse::refresh_token`]
+    pub async fn refresh_token(
+        &self,
+        refresh_token: impl Into<String>,
+        http_client: Option<&oauth2::reqwest::Client>,
+    ) -> Result<
+        oauth2::StandardTokenResponse<EmptyExtraTokenFields, BasicTokenType>,
+        oauth2::RequestTokenError<
+            oauth2::HttpClientError<oauth2::reqwest::Error>,
+            oauth2::StandardErrorResponse<oauth2::basic::BasicErrorResponseType>,
+        >,
+    > {
+        // i love you rust
+        let http_client = http_client
+            .map(|i| std::borrow::Cow::Borrowed(i))
+            .unwrap_or(std::borrow::Cow::Owned(oauth2::reqwest::Client::new()));
+        let res = self
+            .client
+            .exchange_refresh_token(&oauth2::RefreshToken::new(refresh_token.into()))
             .request_async(http_client.as_ref())
             .await?;
         Ok(res)
