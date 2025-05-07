@@ -6,9 +6,13 @@ use quote::quote;
 use titlecase::titlecase;
 use url::Url;
 
-type DOCUMENTATION = String;
-type APISCOPE = String;
-type VALIDRUSTNAME = String;
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+struct Info {
+    documentation: String,
+    api_scope: String,
+    valid_rust_name: String,
+    original_name: String,
+}
 
 #[proc_macro]
 /// A procedural macro for generating group scope enums
@@ -19,9 +23,10 @@ pub fn generate_grouped_scopes_enums(_: TokenStream) -> TokenStream {
 
     let content = include_str!("../info.txt");
 
-    let mut stuffs: HashMap<String, Vec<(VALIDRUSTNAME, DOCUMENTATION, APISCOPE)>> = HashMap::new();
-    let mut current_header = "".to_string();
-    let check = vec!["openid", "profile", "email", "http"];
+    let mut stuffs: HashMap<String, Vec<Info>> = HashMap::new();
+    let mut current_header = String::new();
+    let mut original_header_name = String::new();
+    let check = ["openid", "profile", "email", "http"];
 
     for line in content.lines() {
         if line == "Scopes" {
@@ -69,7 +74,12 @@ pub fn generate_grouped_scopes_enums(_: TokenStream) -> TokenStream {
                 stuffs
                     .entry(current_header.to_string())
                     .or_insert_with(Vec::new)
-                    .push((valided_rust, doc, api_scope_thing));
+                    .push(Info {
+                        documentation: doc,
+                        api_scope: api_scope_thing,
+                        valid_rust_name: valided_rust,
+                        original_name: original_header_name.clone(),
+                    });
                 break;
             }
         }
@@ -86,6 +96,7 @@ pub fn generate_grouped_scopes_enums(_: TokenStream) -> TokenStream {
                 .map(|e| e.to_string())
                 .collect::<Vec<String>>()
                 .join("");
+            original_header_name = line.to_string();
         }
     }
     let mut impl_scope_to: Vec<proc_macro2::TokenStream> = Vec::new();
@@ -95,24 +106,29 @@ pub fn generate_grouped_scopes_enums(_: TokenStream) -> TokenStream {
         let name = syn::Ident::new(k, proc_macro2::Span::call_site());
         let variants = v
             .iter()
-            .map(|(n, _, _)| syn::Ident::new(&n, proc_macro2::Span::call_site()))
+            .map(|i| syn::Ident::new(&i.valid_rust_name, proc_macro2::Span::call_site()))
             .collect::<Vec<proc_macro2::Ident>>();
-        let scope_variants = v.iter().map(|(_, _, s)| s).collect::<Vec<&String>>();
+        let scope_variants = v.iter().map(|i| &i.api_scope).collect::<Vec<&String>>();
         let doc_variants = v
             .iter()
-            .map(|(_, d, s)| {
-                let fd = format!("Documentation: {d}, Scope: {s}");
+            .map(|i| {
+                let fd = format!("Documentation: {}, Scope: {}", i.documentation, i.api_scope);
                 quote! {
                     #[doc = #fd]
                 }
             })
             .collect::<Vec<proc_macro2::TokenStream>>();
+        let orig = v.first().unwrap().original_name.clone();
+        let enum_doc = quote! {
+            #[doc = #orig]
+        };
         enums.push(quote! {
-            #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-            pub enum #name {
-                #(#doc_variants
-                #variants),*
-            }
+                #enum_doc
+                #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+                pub enum #name {
+                    #(#doc_variants
+                    #variants),*
+                }
         });
         impl_scope_to.push(quote! {
             impl ToGoogleScope for #name {
@@ -240,6 +256,7 @@ pub fn generate_scopes_enums(_: TokenStream) -> TokenStream {
     let expanded = quote! {
         #trait_for_scopes
 
+        /// A bunch of scopes merged into one enum (use [`crate::grouped_scopes`] for scopes grouped by their header enums)
         #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
         pub enum Scopes {
             #(#enum_variants)*

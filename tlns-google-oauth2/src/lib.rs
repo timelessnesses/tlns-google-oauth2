@@ -22,10 +22,32 @@ pub mod scopes;
 #[cfg(not(any(feature = "grouped-scopes", feature = "scopes")))]
 compile_error!("You must enable either `grouped-scopes` or `scopes` feature to use this crate.");
 
-/// A thin wrapper around [`oauth2`] for Google OAuth2.
+/// A thin wrapper around [`oauth2`] for Google OAuth2.  
+/// ```should_panic
+/// use tlns_google_oauth2::GoogleOAuth2Client;
+/// 
+/// #[pollster::main]
+/// async fn main() -> Result<(), Box<dyn std::error::Error>> {
+///     let client = GoogleOAuth2Client::new(
+///         "client_id",
+///         "client_secret",
+///         "redirect_uri",
+///     )?;
+///     let auth_url = client.build_authorize_url(
+///         None,
+///         &[&tlns_google_oauth2::grouped_scopes::GoogleOAuth2APIv2::AuthUserinfoProfile, &tlns_google_oauth2::scopes::Scopes::AuthUserinfoEmail],
+///     );
+///     println!("Redirect to {}", auth_url.redirect_url);
+/// 
+///     let token = client.get_token("code", None).await?;
+///     println!("Token: {:?}", token);
+///     Ok(())
+/// }
+/// ```
 #[derive(Clone, Debug)]
 pub struct GoogleOAuth2Client {
     // this is stupid
+    /// OAuth2 client
     pub client: oauth2::Client<
         BasicErrorResponse,
         BasicTokenResponse,
